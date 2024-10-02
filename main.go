@@ -11,8 +11,7 @@ import (
 )
 
 type NoticeElement struct {
-	SlNo           string `json:"slno"`
-	EventType      string `json:"event_type"`
+	MessageId      int    `json:"message_id"`
 	MessageSubject string `json:"message_subject"`
 	MessageBody    string `json:"message_body"`
 	ApprovedOn     string `json:"approved_on"`
