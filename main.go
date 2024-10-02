@@ -19,7 +19,8 @@ type NoticeElement struct {
 	MessageSubject string `json:"message_subject"`
 	MessageBody    string `json:"message_body"`
 	ApprovedOn     string `json:"approved_on"`
-	Attachment     int64  `json:"primary_attachemnt_id"`
+	Attachment     int64  `json:"primary_attachemnt_id"` // This is not a spelling mistake by me
+	AttachmentURL  string `json:"attachment_url"`
 	EventDate      string `json:"event_date"`
 	EventTime      string `json:"time_desc"`
 	EventVenue     string `json:"event_venue"`
@@ -77,15 +78,19 @@ func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
 	}
 
 	if channel < 1000 {
+		// For channels with id 1001 & 1002 the serial number is the message id and message id is empty
 		if fileContent[channel] != lastElement.MessageId {
-			log.Printf("New message on channel %s: \n %v", ERPCatCodeTopicMap[channel], lastElement)
+			lastElement.AttachmentURL = fmt.Sprintf(FileEndpoint, lastElement.Attachment)
+			PrintNewMsg(ERPCatCodeTopicMap[channel], lastElement)
 			fileContent[channel] = lastElement.MessageId
 		} else {
 			log.Printf("Last message id: %d", lastElement.MessageId)
 		}
 	} else {
 		if fileContent[channel] != lastElement.SerialNo {
-			log.Printf("New message on channel %s: \n %v", ERPCatCodeTopicMap[channel], lastElement)
+			lastElement.MessageId = lastElement.SerialNo
+			lastElement.AttachmentURL = fmt.Sprintf(FileEndpoint, lastElement.Attachment)
+			PrintNewMsg(ERPCatCodeTopicMap[channel], lastElement)
 			fileContent[channel] = lastElement.SerialNo
 		} else {
 			log.Printf("Last message id: %d", lastElement.SerialNo)
@@ -102,6 +107,11 @@ func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
 		log.Panicf("Error writing file: %s", err.Error())
 	}
 
+}
+
+func PrintNewMsg(channel string, content NoticeElement) {
+	// this function is called upon receving a new message
+	log.Printf("New message on channel %s: \n %v", channel, content)
 }
 
 func initClient() {
@@ -148,7 +158,7 @@ func main() {
 	}
 
 	NoticeEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/internal_noticeboard/get_notice_list.htm?cat_code=%d"
-	FileEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/groupemailfile?file_id=%s"
+	FileEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/groupemailfile?file_id=%d"
 
 	initClient()
 
