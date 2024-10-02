@@ -26,6 +26,21 @@ type erpCreds struct {
 	SecurityQuestionsAnswers map[string]string `json:"answers"`
 }
 
+func request_otp(client http.Client, loginParams loginDetails) {
+	data := url.Values{}
+	data.Set("typeee", "SI")
+	data.Set("user_id", loginParams.user_id)
+	data.Set("password", loginParams.password)
+	data.Set("answer", loginParams.answer)
+
+	res, err := client.PostForm(OTP_URL, data)
+	if err != nil {
+		log.Printf(err.Error())
+	}
+
+	defer res.Body.Close()
+}
+
 func getCreds(client *http.Client) loginDetails {
 	loginParams := loginDetails{
 		requestedUrl: HOMEPAGE_URL,
@@ -47,14 +62,19 @@ func getCreds(client *http.Client) loginDetails {
 		log.Printf(err.Error())
 	}
 
+	fmt.Println()
+
+	loginParams.answer = string(byte_answer)
+	loginParams.password = string(byte_password)
+
+	request_otp(*client, loginParams)
+
 	fmt.Println("Enter your OTP sent to email: ")
 	byte_otp, err := term.ReadPassword(int(syscall.Stdin))
 	if err != nil {
 		log.Printf(err.Error())
 	}
 
-	loginParams.answer = string(byte_answer)
-	loginParams.password = string(byte_password)
 	loginParams.email_otp = string(byte_otp)
 
 	return loginParams
