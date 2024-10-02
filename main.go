@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/http/cookiejar"
+	"net/url"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -27,25 +29,22 @@ var (
 	NoticeEndpoint     string
 	FileEndpoint       string
 	erpCatCodeTopicMap map[int]string
+	Client             http.Client
 )
 
-func MakeRequest(channel int) *http.Request {
-	client, err := http.NewRequest("GET", fmt.Sprintf(NoticeEndpoint, channel), nil)
-	if err != nil {
-		log.Println(err.Error())
-		return nil
-	}
+func MakeCookies() []*http.Cookie {
 
-	client.AddCookie(&http.Cookie{
+	var Cookies []*http.Cookie
+	Cookies = append(Cookies, &http.Cookie{
 		Name:  "JSESSION",
 		Value: ERPJSession,
 	})
 
-	client.AddCookie(&http.Cookie{
+	Cookies = append(Cookies, &http.Cookie{
 		Name:  "ssoToken",
 		Value: ERPSSOToken,
 	})
-	return client
+	return Cookies
 }
 
 func main() {
@@ -64,17 +63,33 @@ func main() {
 	NoticeEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/internal_noticeboard/get_notice_list.htm?cat_code=%d"
 	FileEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/groupemailfile?file_id=%s"
 
-	client := &http.Client{}
-	req := MakeRequest(12)
-	resp, err := client.Do(req)
+	req, err := http.NewRequest("GET", fmt.Sprintf(NoticeEndpoint, 11), nil)
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatalf("Error %s", err.Error())
+	}
+
+	jar, err := cookiejar.New(nil)
+	if err != nil {
+		log.Fatalf("Error %s", err.Error())
+	}
+
+	parseURL, _ := url.Parse(NoticeEndpoint)
+
+	jar.SetCookies(parseURL, MakeCookies())
+
+	Client = http.Client{
+		Jar: jar,
+	}
+
+	resp, err := Client.Do(req)
+	if err != nil {
+		log.Fatalf("Error %s", err.Error())
 	}
 
 	var resBody []NoticeElement
 
 	if err := json.NewDecoder(resp.Body).Decode(&resBody); err != nil {
-		log.Println(err.Error())
+		log.Fatalf("Error %s", err.Error())
 	}
 
 	fmt.Printf("%v", resBody[0])
