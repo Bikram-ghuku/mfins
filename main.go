@@ -69,6 +69,7 @@ func getNewNotices(channel int) {
 
 	i := 0
 	for i < len(resBody) && resBody[i].MessageId != lastNoticeId && resBody[i].SerialNo != lastNoticeId {
+		resBody[i].AttachmentURL = fmt.Sprintf(FileEndpoint, resBody[i].Attachment)
 		PrintNewMsg(ERPCatCodeTopicMap[channel], resBody[i])
 		i++
 	}
