@@ -84,7 +84,7 @@ func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
 			PrintNewMsg(ERPCatCodeTopicMap[channel], lastElement)
 			fileContent[channel] = lastElement.MessageId
 		} else {
-			log.Printf("Last message id: %d", lastElement.MessageId)
+			log.Printf("No new messages!! Last message id: %d", lastElement.MessageId)
 		}
 	} else {
 		if fileContent[channel] != lastElement.SerialNo {
@@ -93,7 +93,7 @@ func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
 			PrintNewMsg(ERPCatCodeTopicMap[channel], lastElement)
 			fileContent[channel] = lastElement.SerialNo
 		} else {
-			log.Printf("Last message id: %d", lastElement.SerialNo)
+			log.Printf("No new messages!! Last message id: %d", lastElement.SerialNo)
 		}
 	}
 
