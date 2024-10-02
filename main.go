@@ -40,13 +40,13 @@ func RunCron() {
 		log.Println("Getting messages....")
 		for key, value := range ERPCatCodeTopicMap {
 			log.Printf("Getting notices for %s", value)
-			getNotices(key)
+			getNewNotices(key)
 		}
 		time.Sleep(30 * time.Second)
 	}
 }
 
-func getNotices(channel int) {
+func getNewNotices(channel int) {
 	req, err := http.NewRequest("GET", fmt.Sprintf(NoticeEndpoint, channel), nil)
 	if err != nil {
 		log.Fatalf("Error %s", err.Error())
