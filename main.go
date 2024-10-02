@@ -148,10 +148,6 @@ func initClient() {
 func MakeCookies() []*http.Cookie {
 
 	var Cookies []*http.Cookie
-	Cookies = append(Cookies, &http.Cookie{
-		Name:  "JSESSION",
-		Value: ERPJSession,
-	})
 
 	Cookies = append(Cookies, &http.Cookie{
 		Name:  "ssoToken",
