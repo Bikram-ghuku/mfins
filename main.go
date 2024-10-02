@@ -8,11 +8,13 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 )
 
 type NoticeElement struct {
+	SerialNo       int    `json:"slno"`
 	MessageId      int    `json:"message_id"`
 	MessageSubject string `json:"message_subject"`
 	MessageBody    string `json:"message_body"`
@@ -31,6 +33,56 @@ var (
 	erpCatCodeTopicMap map[int]string
 	Client             http.Client
 )
+
+func RunCron() {
+	for true {
+		log.Println("Getting messages....")
+		for key, value := range erpCatCodeTopicMap {
+			log.Printf("Getting notices for %s", value)
+			getNotices(key)
+		}
+		time.Sleep(5 * time.Second)
+	}
+}
+
+func getNotices(channel int) {
+	req, err := http.NewRequest("GET", fmt.Sprintf(NoticeEndpoint, channel), nil)
+	if err != nil {
+		log.Fatalf("Error %s", err.Error())
+	}
+
+	resp, err := Client.Do(req)
+	if err != nil {
+		log.Fatalf("Error %s", err.Error())
+	}
+
+	var resBody []NoticeElement
+
+	if err := json.NewDecoder(resp.Body).Decode(&resBody); err != nil {
+		log.Fatalf("Error %s", err.Error())
+	}
+
+	if channel < 1000 {
+		log.Printf("Last message id: %d", resBody[0].MessageId)
+	} else {
+		log.Printf("Last message id: %d", resBody[0].SerialNo)
+	}
+}
+
+func initClient() {
+	jar, err := cookiejar.New(nil)
+	if err != nil {
+		log.Fatalf("Error %s", err.Error())
+	}
+
+	parseURL, _ := url.Parse(NoticeEndpoint)
+
+	jar.SetCookies(parseURL, MakeCookies())
+
+	Client = http.Client{
+		Jar: jar,
+	}
+}
 
 func MakeCookies() []*http.Cookie {
 
@@ -63,34 +115,7 @@ func main() {
 	NoticeEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/internal_noticeboard/get_notice_list.htm?cat_code=%d"
 	FileEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/groupemailfile?file_id=%s"
 
-	req, err := http.NewRequest("GET", fmt.Sprintf(NoticeEndpoint, 11), nil)
-	if err != nil {
-		log.Fatalf("Error %s", err.Error())
-	}
+	initClient()
 
-	jar, err := cookiejar.New(nil)
-	if err != nil {
-		log.Fatalf("Error %s", err.Error())
-	}
-
-	parseURL, _ := url.Parse(NoticeEndpoint)
-
-	jar.SetCookies(parseURL, MakeCookies())
-
-	Client = http.Client{
-		Jar: jar,
-	}
-
-	resp, err := Client.Do(req)
-	if err != nil {
-		log.Fatalf("Error %s", err.Error())
-	}
-
-	var resBody []NoticeElement
-
-	if err := json.NewDecoder(resp.Body).Decode(&resBody); err != nil {
-		log.Fatalf("Error %s", err.Error())
-	}
-
-	fmt.Printf("%v", resBody[0])
+	RunCron()
 }
