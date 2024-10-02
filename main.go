@@ -61,16 +61,11 @@ func getNotices(channel int) {
 	if err := json.NewDecoder(resp.Body).Decode(&resBody); err != nil {
 		log.Fatalf("Error %s", err.Error())
 	}
-
-	if channel < 1000 {
-		log.Printf("Last message id: %d", resBody[0].MessageId)
-	} else {
-		log.Printf("Last message id: %d", resBody[0].SerialNo)
-	}
+	ChkUpdtLastNotice(channel, resBody[0])
 }
 
 func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
-	file, err := os.Open("lastmsg.json")
+	file, err := os.OpenFile("lastmsg.json", os.O_RDWR|os.O_CREATE, os.ModePerm)
 	defer file.Close()
 	if err != nil {
 		log.Panicf("Error opening file: %s", err.Error())
@@ -97,9 +92,16 @@ func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
 		}
 	}
 
-	if err = json.NewEncoder(file).Encode(fileContent); err != nil {
+	txt, err := json.Marshal(fileContent)
+	if err != nil {
 		log.Panicf("Error writing file: %s", err.Error())
 	}
+
+	file.Seek(0, 0)
+	if _, err = file.Write(txt); err != nil {
+		log.Panicf("Error writing file: %s", err.Error())
+	}
+
 }
 
 func initClient() {
