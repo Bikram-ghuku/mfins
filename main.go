@@ -166,7 +166,7 @@ func main() {
 	TimeRepeat, err = strconv.ParseInt(os.Getenv("REPEAT"), 10, 10)
 	if err != nil {
 		TimeRepeat = 120
-		log.Printf("Error Parsing repeat time: %s", err.Error())
+		log.Printf("Error Parsing repeat time, set to 2mins")
 	}
 
 	ERPCatCodeTopicMap = map[int]string{
