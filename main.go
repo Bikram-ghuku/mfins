@@ -42,7 +42,7 @@ func RunCron() {
 			log.Printf("Getting notices for %s", value)
 			getNotices(key)
 		}
-		time.Sleep(2 * time.Minute)
+		time.Sleep(30 * time.Second)
 	}
 }
 
@@ -62,10 +62,26 @@ func getNotices(channel int) {
 	if err := json.NewDecoder(resp.Body).Decode(&resBody); err != nil {
 		log.Fatalf("Error %s", err.Error())
 	}
-	ChkUpdtLastNotice(channel, resBody[0])
+	lastNoticeId := getLastNotice(channel)
+
+	i := 0
+	for i < len(resBody) && resBody[i].MessageId != lastNoticeId && resBody[i].SerialNo != lastNoticeId {
+		PrintNewMsg(ERPCatCodeTopicMap[channel], resBody[i])
+		i++
+	}
+
+	if channel > 1000 {
+		setLastNotice(channel, resBody[0].SerialNo)
+	} else {
+		setLastNotice(channel, resBody[0].MessageId)
+	}
+
+	if i == 0 {
+		log.Printf("No new message on \"%s\"", ERPCatCodeTopicMap[channel])
+	}
 }
 
-func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
+func getLastNotice(channel int) int {
 	file, err := os.OpenFile("lastmsg.json", os.O_RDWR|os.O_CREATE, os.ModePerm)
 	defer file.Close()
 	if err != nil {
@@ -77,25 +93,22 @@ func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
 		log.Panicf("Error decoding file: %s", err.Error())
 	}
 
-	if channel < 1000 {
-		// For channels with id 1001 & 1002 the serial number is the message id and message id is empty
-		if fileContent[channel] != lastElement.MessageId {
-			lastElement.AttachmentURL = fmt.Sprintf(FileEndpoint, lastElement.Attachment)
-			PrintNewMsg(ERPCatCodeTopicMap[channel], lastElement)
-			fileContent[channel] = lastElement.MessageId
-		} else {
-			log.Printf("No new messages!! Last message id: %d", lastElement.MessageId)
-		}
-	} else {
-		if fileContent[channel] != lastElement.SerialNo {
-			lastElement.MessageId = lastElement.SerialNo
-			lastElement.AttachmentURL = fmt.Sprintf(FileEndpoint, lastElement.Attachment)
-			PrintNewMsg(ERPCatCodeTopicMap[channel], lastElement)
-			fileContent[channel] = lastElement.SerialNo
-		} else {
-			log.Printf("No new messages!! Last message id: %d", lastElement.SerialNo)
-		}
+	return fileContent[channel]
+}
+
+func setLastNotice(channel int, lastMsgId int) {
+	file, err := os.OpenFile("lastmsg.json", os.O_RDWR|os.O_CREATE, os.ModePerm)
+	defer file.Close()
+	if err != nil {
+		log.Panicf("Error opening file: %s", err.Error())
 	}
+
+	var fileContent map[int]int
+	if err = json.NewDecoder(file).Decode(&fileContent); err != nil {
+		log.Panicf("Error decoding file: %s", err.Error())
+	}
+
+	fileContent[channel] = lastMsgId
 
 	txt, err := json.Marshal(fileContent)
 	if err != nil {
@@ -106,12 +119,11 @@ func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
 	if _, err = file.Write(txt); err != nil {
 		log.Panicf("Error writing file: %s", err.Error())
 	}
-
 }
 
 func PrintNewMsg(channel string, content NoticeElement) {
 	// this function is called upon receving a new message
-	log.Printf("New message on channel %s: \n %v", channel, content)
+	log.Printf("New message on channel %s: \n %v", channel, content.MessageSubject)
 }
 
 func initClient() {
