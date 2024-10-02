@@ -8,6 +8,7 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -33,6 +34,8 @@ var (
 	FileEndpoint       string
 	ERPCatCodeTopicMap map[int]string
 	Client             http.Client
+	TimeRepeat         int64
+	err                error
 )
 
 func RunCron() {
@@ -42,7 +45,7 @@ func RunCron() {
 			log.Printf("Getting notices for %s", value)
 			getNewNotices(key)
 		}
-		time.Sleep(30 * time.Second)
+		time.Sleep(time.Duration(TimeRepeat) * time.Second)
 	}
 }
 
@@ -160,6 +163,11 @@ func main() {
 	godotenv.Load()
 	ERPJSession = os.Getenv("JSESSIONID")
 	ERPSSOToken = os.Getenv("ssoToken")
+	TimeRepeat, err = strconv.ParseInt(os.Getenv("REPEAT"), 10, 10)
+	if err != nil {
+		TimeRepeat = 120
+		log.Printf("Error Parsing repeat time: %s", err.Error())
+	}
 
 	ERPCatCodeTopicMap = map[int]string{
 		11:   "Academic",
