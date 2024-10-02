@@ -17,6 +17,9 @@ type NoticeElement struct {
 	MessageBody    string `json:"message_body"`
 	ApprovedOn     string `json:"approved_on"`
 	Attachment     int64  `json:"primary_attachemnt_id"`
+	EventDate      string `json:"event_date"`
+	EventTime      string `json:"time_desc"`
+	EventVenue     string `json:"event_venue"`
 }
 
 var (
