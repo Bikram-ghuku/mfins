@@ -30,14 +30,14 @@ var (
 	ERPSSOToken        string
 	NoticeEndpoint     string
 	FileEndpoint       string
-	erpCatCodeTopicMap map[int]string
+	ERPCatCodeTopicMap map[int]string
 	Client             http.Client
 )
 
 func RunCron() {
 	for true {
 		log.Println("Getting messages....")
-		for key, value := range erpCatCodeTopicMap {
+		for key, value := range ERPCatCodeTopicMap {
 			log.Printf("Getting notices for %s", value)
 			getNotices(key)
 		}
@@ -66,6 +66,39 @@ func getNotices(channel int) {
 		log.Printf("Last message id: %d", resBody[0].MessageId)
 	} else {
 		log.Printf("Last message id: %d", resBody[0].SerialNo)
+	}
+}
+
+func ChkUpdtLastNotice(channel int, lastElement NoticeElement) {
+	file, err := os.Open("lastmsg.json")
+	defer file.Close()
+	if err != nil {
+		log.Panicf("Error opening file: %s", err.Error())
+	}
+
+	var fileContent map[int]int
+	if err = json.NewDecoder(file).Decode(&fileContent); err != nil {
+		log.Panicf("Error decoding file: %s", err.Error())
+	}
+
+	if channel < 1000 {
+		if fileContent[channel] != lastElement.MessageId {
+			log.Printf("New message on channel %s: \n %v", ERPCatCodeTopicMap[channel], lastElement)
+			fileContent[channel] = lastElement.MessageId
+		} else {
+			log.Printf("Last message id: %d", lastElement.MessageId)
+		}
+	} else {
+		if fileContent[channel] != lastElement.SerialNo {
+			log.Printf("New message on channel %s: \n %v", ERPCatCodeTopicMap[channel], lastElement)
+			fileContent[channel] = lastElement.SerialNo
+		} else {
+			log.Printf("Last message id: %d", lastElement.SerialNo)
+		}
+	}
+
+	if err = json.NewEncoder(file).Encode(fileContent); err != nil {
+		log.Panicf("Error writing file: %s", err.Error())
 	}
 }
 
@@ -104,7 +137,7 @@ func main() {
 	ERPJSession = os.Getenv("JSESSIONID")
 	ERPSSOToken = os.Getenv("ssoToken")
 
-	erpCatCodeTopicMap = map[int]string{
+	ERPCatCodeTopicMap = map[int]string{
 		11:   "Academic",
 		12:   "Administrative",
 		13:   "Miscellaneous",
