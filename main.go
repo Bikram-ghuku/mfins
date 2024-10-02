@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/bikram-ghuku/finb/erplogin"
 	"github.com/joho/godotenv"
 )
 
@@ -158,8 +159,8 @@ func MakeCookies() []*http.Cookie {
 
 func main() {
 	godotenv.Load()
-	ERPJSession = os.Getenv("JSESSIONID")
-	ERPSSOToken = os.Getenv("ssoToken")
+
+	ERPSSOToken = erplogin.ERPSession()
 	TimeRepeat, err = strconv.ParseInt(os.Getenv("REPEAT"), 10, 10)
 	if err != nil {
 		TimeRepeat = 120
