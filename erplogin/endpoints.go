@@ -1,4 +1,4 @@
-package main
+package erplogin
 
 const (
 	PING_URL            = "iitkgp.ac.in"
