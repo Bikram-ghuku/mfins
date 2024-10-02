@@ -9,7 +9,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![Wiki][wiki-shield]][wiki-url]
+<!-- [![Wiki][wiki-shield]][wiki-url] -->
 
 </div>
 
@@ -17,19 +17,19 @@
 <br />
 <!-- UPDATE -->
 <div align="center">
-  <a href="https://github.com/metakgp/PROJECT_NAME">
+  <a href="https://github.com/bikram-ghuku/fnb">
      <img width="140" alt="image" src="https://raw.githubusercontent.com/metakgp/design/main/logos/logo.jpg">
   </a>
 
-  <h3 align="center">PROJECT_NAME</h3>
+  <h3 align="center">FNB</h3>
 
   <p align="center">
   <!-- UPDATE -->
-    <i>Project one liner slogan goes here</i>
+    <i>Freaking NoticeBoard</i>
     <br />
     <a href="https://UPDATE.metakgp.org">Website</a>
     ·
-    <a href="https://github.com/proffapt/PROJECT_NAME/issues">Request Feature / Report Bug</a>
+    <a href="https://github.com/bikram-ghuku/fnb/issues">Request Feature / Report Bug</a>
   </p>
 </div>
 
@@ -61,21 +61,14 @@
   </a>
 </div>
 
-_Detailed explaination of the project goes here_
-
+This a microservice designed to send notceboard messages for the internal noticeboard to Naarad (NTFY). It uses the SSO token and jsessionid to access the noticeboard present in the erp. It checks for a new message every 2 minutes.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <div id="supports"></div>
 
-### Supports:
-<!-- UPDATE -->
-1. Shells
-    * `bash`
-    * `zsh`
-2. OS(s)
-    * any `*nix`[`GNU+Linux` and `Unix`]
+<!-- ### Supports: -->
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
 
 ## Getting Started
 
@@ -84,10 +77,7 @@ To set up a local instance of the application, follow the steps below.
 ### Prerequisites
 The following dependencies are required to be installed for the project to function properly:
 <!-- UPDATE -->
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* [golang](https://go.dev/doc/install)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -97,16 +87,21 @@ _Now that the environment has been set up and configured to properly compile and
 <!-- UPDATE -->
 1. Clone the repository
    ```sh
-   git clone https://github.com/metakgp/PROJECT_NAME.git
+   git clone https://github.com/bikram-ghuku/fnb.git
    ```
-2. Make the script executable
+2. Change directory to the folder
    ```sh
-   cd ./PROJECT_NAME
-   chmod +x ./PROJECT_NAME
+   cd ./fnb
    ```
-3. Execute the script
+3. Copy the `.env.example` to `.env` file
+    ```shell
+    cp .env.example .env
+    ```
+4. Fill up the credentials by opening erp and checking cookies
+
+5. Execute the script
    ```sh
-   ./PROJECT_NAME
+    go run main.go
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -118,14 +113,14 @@ _Now that the environment has been set up and configured to properly compile and
 Use this space to show useful examples of how this project can be used. Additional screenshots, code examples and demos work well in this space.
 
 <div align="center">
-  <a href="https://github.com/metakgp/PROJECT_NAME">
+  <a href="https://github.com/bikram-ghuku/fnb">
     <img width="80%" alt="image" src="https://user-images.githubusercontent.com/86282911/206632640-40dc440e-5ef3-4893-be48-618f2bd85f37.png">
   </a>
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Contact
+<!-- ## Contact
 
 <p>
 📫 Metakgp -
@@ -147,21 +142,21 @@ Use this space to show useful examples of how this project can be used. Addition
 <a href="https://www.instagram.com/metakgp_/">
   <img align="center" alt="metakgp's Instagram" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/instagram.svg" />
 </a>
-</p>
+</p> -->
 
 ### Maintainer(s)
 
 The currently active maintainer(s) of this project.
 
 <!-- UPDATE -->
-- [NAME](https://github.com/GITHUB_USERNAME)
+- [Bikram Ghuku](https://github.com/GITHUB_USERNAME)
 
 ### Creator(s)
 
 Honoring the original creator(s) and ideator(s) of this project.
 
 <!-- UPDATE -->
-- [NAME](https://github.com/GITHUB_USERNAME)
+- [Arpit Bhardwaj](https://github.com/proffapt)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -176,16 +171,16 @@ Honoring the original creator(s) and ideator(s) of this project.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/metakgp/PROJECT_NAME.svg?style=for-the-badge
-[contributors-url]: https://github.com/metakgp/PROJECT_NAME/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/metakgp/PROJECT_NAME.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/bikram-ghuku/fnb.svg?style=for-the-badge
+[contributors-url]: https://github.com/bikram-ghuku/fnb/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/bikram-ghuku/fnb.svg?style=for-the-badge
 [forks-url]: https://github.com/metakgp/PROJECT_NAME/network/members
-[stars-shield]: https://img.shields.io/github/stars/metakgp/PROJECT_NAME.svg?style=for-the-badge
-[stars-url]: https://github.com/metakgp/PROJECT_NAME/stargazers
-[issues-shield]: https://img.shields.io/github/issues/metakgp/PROJECT_NAME.svg?style=for-the-badge
-[issues-url]: https://github.com/metakgp/PROJECT_NAME/issues
-[license-shield]: https://img.shields.io/github/license/metakgp/PROJECT_NAME.svg?style=for-the-badge
-[license-url]: https://github.com/metakgp/PROJECT_NAME/blob/master/LICENSE
+[stars-shield]: https://img.shields.io/github/stars/bikram-ghuku/fnb.svg?style=for-the-badge
+[stars-url]: https://github.com/bikram-ghuku/fnb/stargazers
+[issues-shield]: https://img.shields.io/github/issues/bikram-ghuku/fnb.svg?style=for-the-badge
+[issues-url]: https://github.com/bikram-ghuku/fnb/issues
+[license-shield]: https://img.shields.io/github/license/bikram-ghuku/fnb.svg?style=for-the-badge
+[license-url]: https://github.com/bikram-ghuku/fnb/blob/master/LICENSE
 [wiki-shield]: https://custom-icon-badges.demolab.com/badge/metakgp_wiki-grey?logo=metakgp_logo&style=for-the-badge
 [wiki-url]: https://wiki.metakgp.org
 [slack-url]: https://slack.metakgp.org
