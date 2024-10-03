@@ -55,8 +55,14 @@ func getCreds(client *http.Client) loginDetails {
 		log.Printf(err.Error())
 	}
 
-	fmt.Printf("Your secret question: %s\n", getSecretQuestion(client, loginParams.user_id))
+	quest := getSecretQuestion(client, loginParams.user_id)
+	if quest == "FALSE" {
+		return loginDetails{}
+	}
+
+	fmt.Printf("Your secret question: %s\n", quest)
 	fmt.Print("Enter answer to your secret question: ")
+
 	byte_answer, err := term.ReadPassword(int(syscall.Stdin))
 	if err != nil {
 		log.Printf(err.Error())
