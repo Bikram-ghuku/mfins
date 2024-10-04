@@ -171,16 +171,16 @@ Honoring the original creator(s) and ideator(s) of this project.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/bikram-ghuku/fnb.svg?style=for-the-badge
-[contributors-url]: https://github.com/bikram-ghuku/fnb/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/bikram-ghuku/fnb.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/metakgp/mfins.svg?style=for-the-badge
+[contributors-url]: https://github.com/metakgp/mfins/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/metakgp/mfins.svg?style=for-the-badge
 [forks-url]: https://github.com/metakgp/PROJECT_NAME/network/members
-[stars-shield]: https://img.shields.io/github/stars/bikram-ghuku/fnb.svg?style=for-the-badge
-[stars-url]: https://github.com/bikram-ghuku/fnb/stargazers
-[issues-shield]: https://img.shields.io/github/issues/bikram-ghuku/fnb.svg?style=for-the-badge
-[issues-url]: https://github.com/bikram-ghuku/fnb/issues
-[license-shield]: https://img.shields.io/github/license/bikram-ghuku/fnb.svg?style=for-the-badge
-[license-url]: https://github.com/bikram-ghuku/fnb/blob/master/LICENSE
+[stars-shield]: https://img.shields.io/github/stars/metakgp/mfins.svg?style=for-the-badge
+[stars-url]: https://github.com/metakgp/mfins/stargazers
+[issues-shield]: https://img.shields.io/github/issues/metakgp/mfins.svg?style=for-the-badge
+[issues-url]: https://github.com/metakgp/mfins/issues
+[license-shield]: https://img.shields.io/github/license/metakgp/mfins.svg?style=for-the-badge
+[license-url]: https://github.com/metakgp/mfins/blob/master/LICENSE
 [wiki-shield]: https://custom-icon-badges.demolab.com/badge/metakgp_wiki-grey?logo=metakgp_logo&style=for-the-badge
 [wiki-url]: https://wiki.metakgp.org
 [slack-url]: https://slack.metakgp.org
