@@ -17,7 +17,7 @@
 <br />
 <!-- UPDATE -->
 <div align="center">
-  <a href="https://github.com/bikram-ghuku/fnb">
+  <a href="https://github.com/metakgp/mfins">
      <img width="140" alt="image" src="https://raw.githubusercontent.com/metakgp/design/main/logos/logo.jpg">
   </a>
 
@@ -29,7 +29,7 @@
     <br />
     <a href="https://UPDATE.metakgp.org">Website</a>
     ·
-    <a href="https://github.com/bikram-ghuku/fnb/issues">Request Feature / Report Bug</a>
+    <a href="https://github.com/metakgp/mfins/issues">Request Feature / Report Bug</a>
   </p>
 </div>
 
@@ -56,7 +56,7 @@
 ## About The Project
 <!-- UPDATE -->
 <div align="center">
-  <a href="https://github.com/metakgp/PROJECT_NAME">
+  <a href="https://github.com/metakgp/mfins">
     <img width="80%" alt="image" src="https://user-images.githubusercontent.com/86282911/206632547-a3b34b47-e7ae-4186-a1e6-ecda7ddb38e6.png">
   </a>
 </div>
@@ -87,7 +87,7 @@ _Now that the environment has been set up and configured to properly compile and
 <!-- UPDATE -->
 1. Clone the repository
    ```sh
-   git clone https://github.com/bikram-ghuku/fnb.git
+   git clone https://github.com/metakgp/mfins.git
    ```
 2. Change directory to the folder
    ```sh
@@ -113,43 +113,43 @@ _Now that the environment has been set up and configured to properly compile and
 Use this space to show useful examples of how this project can be used. Additional screenshots, code examples and demos work well in this space.
 
 <div align="center">
-  <a href="https://github.com/bikram-ghuku/fnb">
+  <a href="https://github.com/metakgp/mfins">
     <img width="80%" alt="image" src="https://user-images.githubusercontent.com/86282911/206632640-40dc440e-5ef3-4893-be48-618f2bd85f37.png">
   </a>
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- ## Contact
+## Contact
 
 <p>
-📫 Metakgp -
-<a href="https://slack.metakgp.org">
-  <img align="center" alt="Metakgp's slack invite" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/slack.svg" />
-</a>
-<a href="mailto:metakgp@gmail.com">
-  <img align="center" alt="Metakgp's email " width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/gmail.svg" />
-</a>
-<a href="https://www.facebook.com/metakgp">
-  <img align="center" alt="metakgp's Facebook" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/facebook.svg" />
-</a>
-<a href="https://www.linkedin.com/company/metakgp-org/">
-  <img align="center" alt="metakgp's LinkedIn" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/linkedin.svg" />
-</a>
-<a href="https://twitter.com/metakgp">
-  <img align="center" alt="metakgp's Twitter " width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/twitter.svg" />
-</a>
-<a href="https://www.instagram.com/metakgp_/">
-  <img align="center" alt="metakgp's Instagram" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/instagram.svg" />
-</a>
-</p> -->
+  📫 Metakgp -
+  <a href="https://slack.metakgp.org">
+    <img align="center" alt="Metakgp's slack invite" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/slack.svg" />
+  </a>
+  <a href="mailto:metakgp@gmail.com">
+    <img align="center" alt="Metakgp's email " width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/gmail.svg" />
+  </a>
+  <a href="https://www.facebook.com/metakgp">
+    <img align="center" alt="metakgp's Facebook" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/facebook.svg" />
+  </a>
+  <a href="https://www.linkedin.com/company/metakgp-org/">
+    <img align="center" alt="metakgp's LinkedIn" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/linkedin.svg" />
+  </a>
+  <a href="https://twitter.com/metakgp">
+    <img align="center" alt="metakgp's Twitter " width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/twitter.svg" />
+  </a>
+  <a href="https://www.instagram.com/metakgp_/">
+    <img align="center" alt="metakgp's Instagram" width="22px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/instagram.svg" />
+  </a>
+</p>
 
 ### Maintainer(s)
 
 The currently active maintainer(s) of this project.
 
 <!-- UPDATE -->
-- [Bikram Ghuku](https://github.com/GITHUB_USERNAME)
+- [Bikram Ghuku](https://github.com/bikram-ghuku)
 
 ### Creator(s)
 
