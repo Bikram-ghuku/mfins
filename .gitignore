@@ -2,3 +2,5 @@
 .DS_Store
 .vscode
 node-modules/
+.env
+lastmsg.json
