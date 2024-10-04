@@ -9,11 +9,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-<<<<<<< HEAD
-[![Wiki][wiki-shield]][wiki-url]
-=======
 <!-- [![Wiki][wiki-shield]][wiki-url] -->
->>>>>>> origin/main
 
 </div>
 
@@ -21,21 +17,6 @@
 <br />
 <!-- UPDATE -->
 <div align="center">
-<<<<<<< HEAD
-  <a href="https://github.com/metakgp/PROJECT_NAME">
-     <img width="140" alt="image" src="https://raw.githubusercontent.com/metakgp/design/main/logos/logo.jpg">
-  </a>
-
-  <h3 align="center">PROJECT_NAME</h3>
-
-  <p align="center">
-  <!-- UPDATE -->
-    <i>Project one liner slogan goes here</i>
-    <br />
-    <a href="https://UPDATE.metakgp.org">Website</a>
-    ·
-    <a href="https://github.com/proffapt/PROJECT_NAME/issues">Request Feature / Report Bug</a>
-=======
   <a href="https://github.com/bikram-ghuku/fnb">
      <img width="140" alt="image" src="https://raw.githubusercontent.com/metakgp/design/main/logos/logo.jpg">
   </a>
@@ -49,7 +30,6 @@
     <a href="https://UPDATE.metakgp.org">Website</a>
     ·
     <a href="https://github.com/bikram-ghuku/fnb/issues">Request Feature / Report Bug</a>
->>>>>>> origin/main
   </p>
 </div>
 
@@ -81,31 +61,14 @@
   </a>
 </div>
 
-<<<<<<< HEAD
-_Detailed explaination of the project goes here_
-
-=======
 This a microservice designed to send notceboard messages for the internal noticeboard to Naarad (NTFY). It uses the SSO token and jsessionid to access the noticeboard present in the erp. It checks for a new message every 2 minutes.
->>>>>>> origin/main
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <div id="supports"></div>
 
-<<<<<<< HEAD
-### Supports:
-<!-- UPDATE -->
-1. Shells
-    * `bash`
-    * `zsh`
-2. OS(s)
-    * any `*nix`[`GNU+Linux` and `Unix`]
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-=======
 <!-- ### Supports: -->
 
 <!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
->>>>>>> origin/main
 
 ## Getting Started
 
@@ -114,14 +77,7 @@ To set up a local instance of the application, follow the steps below.
 ### Prerequisites
 The following dependencies are required to be installed for the project to function properly:
 <!-- UPDATE -->
-<<<<<<< HEAD
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-=======
 * [golang](https://go.dev/doc/install)
->>>>>>> origin/main
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
