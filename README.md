@@ -9,7 +9,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-<!-- [![Wiki][wiki-shield]][wiki-url] -->
+[![Wiki][wiki-shield]][wiki-url]
 
 </div>
 
@@ -91,7 +91,7 @@ _Now that the environment has been set up and configured to properly compile and
    ```
 2. Change directory to the folder
    ```sh
-   cd ./fnb
+   cd ./mfins
    ```
 3. Copy the `.env.example` to `.env` file
     ```shell
