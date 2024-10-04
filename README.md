@@ -21,11 +21,11 @@
      <img width="140" alt="image" src="https://raw.githubusercontent.com/metakgp/design/main/logos/logo.jpg">
   </a>
 
-  <h3 align="center">FNB</h3>
+  <h3 align="center">MFINS</h3>
 
   <p align="center">
   <!-- UPDATE -->
-    <i>Freaking NoticeBoard</i>
+    <i>My Freakin' Internal Noticeboard Scrapper</i>
     <br />
     <a href="https://UPDATE.metakgp.org">Website</a>
     ·
