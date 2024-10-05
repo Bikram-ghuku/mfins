@@ -1,4 +1,4 @@
-module github.com/bikram-ghuku/finb
+module github.com/metakgp/mfins
 
 go 1.23.1
 
