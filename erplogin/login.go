@@ -16,7 +16,13 @@ var (
 	emailOTP      string
 )
 
-func Login(client http.Client) string {
+func Login(client http.Client) {
+
+	if checkLogin(&client) {
+		log.Println("Already logged in, continuing without login")
+		return
+	}
+
 	rollNo = os.Getenv("rollno")
 	password = os.Getenv("password")
 
@@ -32,8 +38,6 @@ func Login(client http.Client) string {
 	fmt.Scan(&emailOTP)
 
 	loginBody(&client)
-
-	return ""
 }
 
 func getSecurityQues(client *http.Client, rollNo string) string {
@@ -91,4 +95,15 @@ func loginBody(client *http.Client) {
 	}
 
 	defer resp.Body.Close()
+}
+
+func checkLogin(client *http.Client) bool {
+
+	res, err := client.Get(WELCOMEPAGE_URL)
+
+	if err != nil {
+		log.Panic(err.Error())
+	}
+
+	return res.ContentLength == 1034
 }
