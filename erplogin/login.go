@@ -28,12 +28,6 @@ func Login(client http.Client) {
 	question := getSecurityQues(&client, rollNo)
 	securityAnswer = GetSecurityAnswer(question)
 
-	// fmt.Printf("Security Question: %s", getSecurityQues(&client, rollNo))
-	// fmt.Println()
-
-	// fmt.Printf("Enter answer to security question: ")
-	// fmt.Scan(&securityAnswer)
-
 	emailOTP = GetOtp(&client)
 
 	loginBody(&client)

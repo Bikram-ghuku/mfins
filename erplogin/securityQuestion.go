@@ -25,7 +25,7 @@ func GetSecurityAnswer(question string) string {
 			log.Fatal(err.Error())
 		}
 
-		questionAnswer[question] = inputAnswer(question)
+		inputAnswer(question)
 
 		questionAnswerJson, err := json.Marshal(questionAnswer)
 		if err != nil {
@@ -37,8 +37,7 @@ func GetSecurityAnswer(question string) string {
 		return questionAnswer[question]
 
 	} else {
-
-		questionAnswer[question] = inputAnswer(question)
+		inputAnswer(question)
 
 		questionAnswerJson, err := json.Marshal(questionAnswer)
 		if err != nil {
@@ -48,17 +47,15 @@ func GetSecurityAnswer(question string) string {
 		os.WriteFile(FILENAME, questionAnswerJson, 0666)
 
 		return questionAnswer[question]
-
 	}
-
 }
 
-func inputAnswer(question string) string {
+func inputAnswer(question string) {
 	var answer string
 	fmt.Printf("Security question: %s", question)
 	fmt.Println()
 	fmt.Print("Enter answer to security question: ")
 	fmt.Scan(&answer)
 
-	return answer
+	questionAnswer[question] = answer
 }
