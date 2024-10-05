@@ -1,7 +1,6 @@
 package erplogin
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -10,10 +9,10 @@ import (
 )
 
 var (
-	rollNo        string
-	password      string
-	securiyAnswer string
-	emailOTP      string
+	rollNo         string
+	password       string
+	securityAnswer string
+	emailOTP       string
 )
 
 func Login(client http.Client) {
@@ -26,11 +25,14 @@ func Login(client http.Client) {
 	rollNo = os.Getenv("rollno")
 	password = os.Getenv("password")
 
-	fmt.Printf("Security Question: %s", getSecurityQues(&client, rollNo))
-	fmt.Println()
+	question := getSecurityQues(&client, rollNo)
+	securityAnswer = GetSecurityAnswer(question)
 
-	fmt.Printf("Enter answer to security question: ")
-	fmt.Scan(&securiyAnswer)
+	// fmt.Printf("Security Question: %s", getSecurityQues(&client, rollNo))
+	// fmt.Println()
+
+	// fmt.Printf("Enter answer to security question: ")
+	// fmt.Scan(&securityAnswer)
 
 	emailOTP = GetOtp(&client)
 
@@ -59,7 +61,7 @@ func SendOTP(client *http.Client) {
 	data := url.Values{}
 	data.Set("user_id", rollNo)
 	data.Set("password", password)
-	data.Set("answer", securiyAnswer)
+	data.Set("answer", securityAnswer)
 	data.Set("requestedUrl", HOMEPAGE_URL)
 	data.Set("typeee", "SI")
 
@@ -77,7 +79,7 @@ func loginBody(client *http.Client) {
 
 	data.Set("user_id", rollNo)
 	data.Set("password", password)
-	data.Set("answer", securiyAnswer)
+	data.Set("answer", securityAnswer)
 	data.Set("email_otp", emailOTP)
 	data.Set("requestedUrl", HOMEPAGE_URL)
 
