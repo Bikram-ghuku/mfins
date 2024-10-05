@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/bikram-ghuku/finb/erplogin"
 	"github.com/joho/godotenv"
+	"github.com/metakgp/mfins/erplogin"
 )
 
 type NoticeElement struct {
@@ -40,11 +40,17 @@ var (
 
 func RunCron() {
 	for true {
+
+		log.Println("Logining Into ERP....")
+		erplogin.Login(Client)
+
 		log.Println("Getting messages....")
+
 		for key, value := range ERPCatCodeTopicMap {
 			log.Printf("Getting notices for %s", value)
 			getNewNotices(key)
 		}
+
 		time.Sleep(time.Duration(TimeRepeat) * time.Second)
 	}
 }
@@ -162,8 +168,6 @@ func main() {
 	FileEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/groupemailfile?file_id=%d"
 
 	initClient()
-
-	erplogin.Login(Client)
 
 	RunCron()
 }
