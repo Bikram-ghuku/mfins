@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/bikram-ghuku/finb/erplogin"
 	"github.com/joho/godotenv"
 )
 
@@ -159,7 +160,6 @@ func MakeCookies() []*http.Cookie {
 func main() {
 	godotenv.Load()
 
-	ERPSSOToken = os.Getenv("ssoToken")
 	TimeRepeat, err = strconv.ParseInt(os.Getenv("REPEAT"), 10, 10)
 	if err != nil {
 		TimeRepeat = 120
@@ -178,6 +178,8 @@ func main() {
 	FileEndpoint = "https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/groupemailfile?file_id=%d"
 
 	initClient()
+
+	erplogin.Login(Client)
 
 	RunCron()
 }
