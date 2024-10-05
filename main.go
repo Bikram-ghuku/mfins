@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"net/http/cookiejar"
-	"net/url"
 	"os"
 	"strconv"
 	"time"
@@ -137,24 +136,9 @@ func initClient() {
 		log.Fatalf("Error %s", err.Error())
 	}
 
-	parseURL, _ := url.Parse(NoticeEndpoint)
-
-	jar.SetCookies(parseURL, MakeCookies())
-
 	Client = http.Client{
 		Jar: jar,
 	}
-}
-
-func MakeCookies() []*http.Cookie {
-
-	var Cookies []*http.Cookie
-
-	Cookies = append(Cookies, &http.Cookie{
-		Name:  "ssoToken",
-		Value: ERPSSOToken,
-	})
-	return Cookies
 }
 
 func main() {
