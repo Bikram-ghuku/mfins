@@ -32,10 +32,7 @@ func Login(client http.Client) {
 	fmt.Printf("Enter answer to security question: ")
 	fmt.Scan(&securiyAnswer)
 
-	getOTP(&client)
-
-	fmt.Printf("Enter OTP Sent to your email: ")
-	fmt.Scan(&emailOTP)
+	emailOTP = GetOtp(&client)
 
 	loginBody(&client)
 }
@@ -58,7 +55,7 @@ func getSecurityQues(client *http.Client, rollNo string) string {
 	return string(byteResp)
 }
 
-func getOTP(client *http.Client) {
+func SendOTP(client *http.Client) {
 	data := url.Values{}
 	data.Set("user_id", rollNo)
 	data.Set("password", password)
@@ -71,10 +68,6 @@ func getOTP(client *http.Client) {
 	if err != nil {
 		log.Panic(err.Error())
 	}
-
-	dataByte, _ := io.ReadAll(res.Body)
-
-	log.Println(string(dataByte))
 
 	defer res.Body.Close()
 }
