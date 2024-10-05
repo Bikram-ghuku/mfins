@@ -25,7 +25,11 @@ func GetSecurityAnswer(question string) string {
 			log.Fatal(err.Error())
 		}
 
-		inputAnswer(question)
+		if val, ok := questionAnswer[question]; ok {
+			return val
+		} else {
+			inputAnswer(question)
+		}
 
 		questionAnswerJson, err := json.Marshal(questionAnswer)
 		if err != nil {
