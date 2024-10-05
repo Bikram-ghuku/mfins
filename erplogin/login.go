@@ -52,6 +52,7 @@ func getSecurityQues(client *http.Client, rollNo string) string {
 }
 
 func SendOTP(client *http.Client) {
+	log.Println("Requesting OTP....")
 	data := url.Values{}
 	data.Set("user_id", rollNo)
 	data.Set("password", password)
@@ -64,6 +65,8 @@ func SendOTP(client *http.Client) {
 	if err != nil {
 		log.Panic(err.Error())
 	}
+
+	log.Println("OTP requested successfully!")
 
 	defer res.Body.Close()
 }

@@ -26,8 +26,12 @@ const (
 
 func GetOtp(client *http.Client) string {
 	if is_file("client_secret.json") || is_file(".token") {
+
+		log.Println("Found google OAuth credentials, Automatically reading OTP")
+
 		return GetOtpEmail(client)
 	} else {
+
 		return GetOtpInput(client)
 	}
 }

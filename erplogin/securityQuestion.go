@@ -15,6 +15,8 @@ func GetSecurityAnswer(question string) string {
 
 	if is_file(FILENAME) {
 
+		log.Printf("Found %s, checking if question is present....", FILENAME)
+
 		quesByte, err := os.ReadFile(FILENAME)
 		if err != nil {
 			log.Fatal(err.Error())
@@ -26,6 +28,7 @@ func GetSecurityAnswer(question string) string {
 		}
 
 		if val, ok := questionAnswer[question]; ok {
+			log.Println("Found answer to security question!")
 			return val
 		} else {
 			inputAnswer(question)
@@ -41,6 +44,7 @@ func GetSecurityAnswer(question string) string {
 		return questionAnswer[question]
 
 	} else {
+		log.Printf("%s not found, creating.....", FILENAME)
 		inputAnswer(question)
 
 		questionAnswerJson, err := json.Marshal(questionAnswer)
