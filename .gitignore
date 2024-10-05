@@ -4,3 +4,5 @@
 node-modules/
 .env
 lastmsg.json
+client_secret.json
+.token
