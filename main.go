@@ -75,7 +75,10 @@ func getNewNotices(channel int) {
 
 	i := 0
 	for i < len(resBody) && resBody[i].MessageId != lastNoticeId && resBody[i].SerialNo != lastNoticeId {
-		resBody[i].AttachmentURL = fmt.Sprintf(FileEndpoint, resBody[i].Attachment)
+		if resBody[i].Attachment != 0 {
+			resBody[i].AttachmentURL = fmt.Sprintf(FileEndpoint, resBody[i].Attachment)
+		}
+
 		PrintNewMsg(ERPCatCodeTopicMap[channel], resBody[i])
 		i++
 	}
@@ -134,6 +137,8 @@ func setLastNotice(channel int, lastMsgId int) {
 func PrintNewMsg(channel string, content NoticeElement) {
 	// this function is called upon receving a new message
 	log.Printf("New message on channel %s: \n %v", channel, content.MessageSubject)
+
+	PostData(channel, content)
 }
 
 func initClient() {
