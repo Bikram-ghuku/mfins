@@ -1,4 +1,4 @@
-module github.com/metakgp/mfins
+module github.com/metakgp/mfins/mfins
 
 go 1.23.1
 

@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/metakgp/mfins/erplogin"
+	"github.com/metakgp/mfins/mfins/erplogin"
 )
 
 type NoticeElement struct {
