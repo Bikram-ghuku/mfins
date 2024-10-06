@@ -97,9 +97,20 @@ _Now that the environment has been set up and configured to properly compile and
     ```shell
     cp .env.example .env
     ```
-4. Fill up the credentials by opening erp and checking cookies
+4. Fill the .env files with your erp credentials
 
-5. Execute the script
+5. Create `lastmsg.json` and add `{}` in it
+    ```sh
+      touch lastmsg.json && echo {} > lastmsg.json
+    ```
+6. Create `security_question.json` and add `{}` to it
+    ```sh
+      touch security_question.json && echo {} > security_question.json
+    ```
+
+7. Create a google OAuth client secret and client id and add it to `client_secret.json`
+
+8. Execute the script
    ```sh
     go run main.go
    ```
