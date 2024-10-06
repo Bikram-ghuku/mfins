@@ -112,7 +112,7 @@ _Now that the environment has been set up and configured to properly compile and
 
 8. Execute the script
    ```sh
-    go run main.go
+    go run .
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
