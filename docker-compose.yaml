@@ -1,0 +1,20 @@
+services:
+  mfins:
+    build:
+      context: ./mfins
+      dockerfile: Dockerfile
+    image: metakgp/mfins
+    container_name: mfins
+    volumes:
+      - $MFINS_CONFIG/.env:/app/.env
+      - $MFINS_CONFIG/client_secret.json:/app/client_secret.json
+      - $MFINS_CONFIG/security_question.json:/app/security_question.json
+      - $MFINS_CONFIG/lastmsg.json:/app/lastmsg.json
+      - $MFINS_CONFIG/.token:/app/.token
+
+  mfins_doctor:
+    build:
+      context: ./mfins-doctor
+      dockerfile: Dockerfile
+    image: metakgp/mfins-doctor
+    container_name: mfins-doctor
