@@ -22,8 +22,8 @@ func Login(client http.Client) {
 		return
 	}
 
-	rollNo = os.Getenv("rollno")
-	password = os.Getenv("password")
+	rollNo = os.Getenv("ROLL_NO")
+	password = os.Getenv("PASSWORD")
 
 	question := getSecurityQues(&client, rollNo)
 	securityAnswer = GetSecurityAnswer(question)
