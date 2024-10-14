@@ -6,8 +6,10 @@ import (
 	"log"
 	"net/http"
 	"net/http/cookiejar"
+	"net/url"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -29,7 +31,7 @@ type NoticeElement struct {
 
 var (
 	ERPJSession        string
-	ERPSSOToken        string
+	ERPSSOToken        []string
 	NoticeEndpoint     string
 	FileEndpoint       string
 	ERPCatCodeTopicMap map[int]string
@@ -42,7 +44,7 @@ func RunCron() {
 	for true {
 
 		log.Println("Logining Into ERP....")
-		_, ERPSSOToken = erp.ERPSession()
+		ERPLogin()
 
 		log.Println("Getting messages....")
 
@@ -139,6 +141,29 @@ func PrintNewMsg(channel string, content NoticeElement) {
 	log.Printf("New message on channel %s: \n %v", channel, content.MessageSubject)
 
 	PostData(channel, content)
+}
+
+func ERPLogin() {
+
+	_, ERPSSOTokenString := erp.ERPSession()
+
+	ERPSSOToken = strings.Split(ERPSSOTokenString, "=")
+
+	cookies := []*http.Cookie{
+		{
+			Name:  ERPSSOToken[0],
+			Value: ERPSSOToken[1],
+		},
+	}
+
+	urlParse, err := url.Parse(NoticeEndpoint)
+
+	if err != nil {
+		log.Fatalf("Error parsing endpoint url")
+	}
+
+	Client.Jar.SetCookies(urlParse, cookies)
+
 }
 
 func initClient() {
