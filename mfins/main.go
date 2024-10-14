@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/metakgp/mfins/mfins/erplogin"
+	erp "github.com/metakgp/iitkgp-erp-login-go"
 )
 
 type NoticeElement struct {
@@ -42,7 +42,7 @@ func RunCron() {
 	for true {
 
 		log.Println("Logining Into ERP....")
-		erplogin.Login(Client)
+		_, ERPSSOToken = erp.ERPSession()
 
 		log.Println("Getting messages....")
 

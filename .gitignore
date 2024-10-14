@@ -6,4 +6,5 @@ node-modules/
 lastmsg.json
 client_secret.json
 .token
-security_question.json
+erpcreds.json
+.session
