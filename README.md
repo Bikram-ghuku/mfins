@@ -103,16 +103,13 @@ _Now that the environment has been set up and configured to properly compile and
     ```sh
       touch lastmsg.json && echo {} > lastmsg.json
     ```
-6. Create `security_question.json` and add `{}` to it
-    ```sh
-      touch security_question.json && echo {} > security_question.json
-    ```
+6. Create `erpcreds.json` and add roll_no, password, answers
 
 7. Create a google OAuth client secret and client id and add it to `client_secret.json`
 
 8. Execute the script
    ```sh
-    go run .
+    go run ./mfins
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
