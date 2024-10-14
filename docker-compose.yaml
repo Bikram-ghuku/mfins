@@ -8,9 +8,10 @@ services:
     volumes:
       - $MFINS_CONFIG/.env:/app/.env
       - $MFINS_CONFIG/client_secret.json:/app/client_secret.json
-      - $MFINS_CONFIG/security_question.json:/app/security_question.json
+      - $MFINS_CONFIG/erpcreds.json:/app/erpcreds.json
       - $MFINS_CONFIG/lastmsg.json:/app/lastmsg.json
       - $MFINS_CONFIG/.token:/app/.token
+      - $MFINS_CONFIG/.session:/app/.session
 
   mfins_doctor:
     build:
