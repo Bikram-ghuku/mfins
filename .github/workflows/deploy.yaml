@@ -31,27 +31,27 @@ jobs:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-            - name: Cache Docker layers SERVICE_NAME
+            - name: Cache Docker layers mfins
               uses: actions/cache@v3
               with:
-                  path: /tmp/.buildx-cache-SERVICE_NAME
-                  key: ${{ runner.os }}-buildx-SERVICE_NAME-${{ github.sha }}
+                  path: /tmp/.buildx-cache-mfins
+                  key: ${{ runner.os }}-buildx-mfins-${{ github.sha }}
                   restore-keys: |
-                      ${{ runner.os }}-buildx-SERVICE_NAME-
+                      ${{ runner.os }}-buildx-mfins-
 
-            - name: Build & Push SERVICE_NAME
+            - name: Build & Push mfins
               uses: docker/build-push-action@v5
               with:
-                  context: .
+                  context: ./mfins/
                   push: true
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/SERVICE_NAME:latest
-                  cache-from: type=local,src=/tmp/.buildx-cache-SERVICE_NAME
-                  cache-to: type=local,dest=/tmp/.buildx-cache-SERVICE_NAME-new,mode=max
+                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/mfins:latest
+                  cache-from: type=local,src=/tmp/.buildx-cache-mfins
+                  cache-to: type=local,dest=/tmp/.buildx-cache-mfins-new,mode=max
 
-            - name: Move SERVICE_NAME cache
+            - name: Move mfins cache
               run: |
-                  rm -rf /tmp/.buildx-cache-SERVICE_NAME
-                  mv /tmp/.buildx-cache-SERVICE_NAME-new /tmp/.buildx-cache-SERVICE_NAME
+                  rm -rf /tmp/.buildx-cache-mfins
+                  mv /tmp/.buildx-cache-mfins-new /tmp/.buildx-cache-mfins
 
     push:
         name: Push Code Stage
