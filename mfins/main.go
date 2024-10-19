@@ -60,18 +60,18 @@ func RunCron() {
 func getNewNotices(channel int) {
 	req, err := http.NewRequest("GET", fmt.Sprintf(NoticeEndpoint, channel), nil)
 	if err != nil {
-		log.Fatalf("Error %s", err.Error())
+		log.Fatalf("Failed to generate request ~ %s", err.Error())
 	}
 
 	resp, err := Client.Do(req)
 	if err != nil {
-		log.Fatalf("Error %s", err.Error())
+		log.Fatalf("Failed to access noticeboard ~ %s", err.Error())
 	}
 
 	var resBody []NoticeElement
 
 	if err := json.NewDecoder(resp.Body).Decode(&resBody); err != nil {
-		log.Fatalf("Error %s", err.Error())
+		log.Fatalf("Failed to decode notices ~ %s", err.Error())
 	}
 	lastNoticeId := getLastNotice(channel)
 
@@ -100,12 +100,12 @@ func getLastNotice(channel int) int {
 	file, err := os.OpenFile("lastmsg.json", os.O_RDWR|os.O_CREATE, os.ModePerm)
 	defer file.Close()
 	if err != nil {
-		log.Panicf("Error opening file: %s", err.Error())
+		log.Panicf("Failed to open last msg file ~ %s", err.Error())
 	}
 
 	var fileContent map[int]int
 	if err = json.NewDecoder(file).Decode(&fileContent); err != nil {
-		log.Panicf("Error decoding file: %s", err.Error())
+		log.Panicf("Failed to decode last msg file ~ %s", err.Error())
 	}
 
 	return fileContent[channel]
@@ -115,24 +115,24 @@ func setLastNotice(channel int, lastMsgId int) {
 	file, err := os.OpenFile("lastmsg.json", os.O_RDWR|os.O_CREATE, os.ModePerm)
 	defer file.Close()
 	if err != nil {
-		log.Panicf("Error opening file: %s", err.Error())
+		log.Panicf("Failed to open last msg file ~ %s", err.Error())
 	}
 
 	var fileContent map[int]int
 	if err = json.NewDecoder(file).Decode(&fileContent); err != nil {
-		log.Panicf("Error decoding file: %s", err.Error())
+		log.Panicf("Failed to decode last msg file ~ %s", err.Error())
 	}
 
 	fileContent[channel] = lastMsgId
 
 	txt, err := json.Marshal(fileContent)
 	if err != nil {
-		log.Panicf("Error writing file: %s", err.Error())
+		log.Panicf("Error writing last msg file ~ %s", err.Error())
 	}
 
 	file.Seek(0, 0)
 	if _, err = file.Write(txt); err != nil {
-		log.Panicf("Error writing file: %s", err.Error())
+		log.Panicf("Error writing last msg file ~ %s", err.Error())
 	}
 }
 
@@ -169,7 +169,7 @@ func ERPLogin() {
 func initClient() {
 	jar, err := cookiejar.New(nil)
 	if err != nil {
-		log.Fatalf("Error %s", err.Error())
+		log.Fatalf("Error Building cookie storage for request ~ %s", err.Error())
 	}
 
 	Client = http.Client{
