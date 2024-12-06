@@ -19,3 +19,5 @@ services:
       dockerfile: Dockerfile
     image: metakgp/mfins-doctor
     container_name: mfins-doctor
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
