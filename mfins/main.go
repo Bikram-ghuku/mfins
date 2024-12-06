@@ -41,7 +41,8 @@ var (
 )
 
 func RunCron() {
-	for true {
+	for {
+		log.Println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 
 		log.Println("Logining Into ERP....")
 		ERPLogin()
@@ -52,6 +53,8 @@ func RunCron() {
 			log.Printf("Getting notices for %s", value)
 			getNewNotices(key)
 		}
+
+		log.Println("================ <<: :>> ================")
 
 		time.Sleep(time.Duration(TimeRepeat) * time.Second)
 	}
@@ -98,10 +101,11 @@ func getNewNotices(channel int) {
 
 func getLastNotice(channel int) int {
 	file, err := os.OpenFile("lastmsg.json", os.O_RDWR|os.O_CREATE, os.ModePerm)
-	defer file.Close()
 	if err != nil {
 		log.Panicf("Failed to open last msg file ~ %s", err.Error())
 	}
+
+	defer file.Close()
 
 	var fileContent map[int]int
 	if err = json.NewDecoder(file).Decode(&fileContent); err != nil {
@@ -113,10 +117,11 @@ func getLastNotice(channel int) int {
 
 func setLastNotice(channel int, lastMsgId int) {
 	file, err := os.OpenFile("lastmsg.json", os.O_RDWR|os.O_CREATE, os.ModePerm)
-	defer file.Close()
 	if err != nil {
 		log.Panicf("Failed to open last msg file ~ %s", err.Error())
 	}
+
+	defer file.Close()
 
 	var fileContent map[int]int
 	if err = json.NewDecoder(file).Decode(&fileContent); err != nil {
