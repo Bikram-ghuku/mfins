@@ -18,6 +18,7 @@ var (
 	end_suffix    = "================ <<: :>> ================"
 	chk_words     = [3]string{"Failed", "Error", "panic"}
 	lastStartDate time.Time
+	containerID   string
 )
 
 func getDate(line string) time.Time {
@@ -35,14 +36,7 @@ func getDate(line string) time.Time {
 	return t
 }
 
-func main() {
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
-	if err != nil {
-		fmt.Printf("Error creating Docker client: %v\n", err)
-		return
-	}
-
-	containerID := "mfins"
+func CheckLogs(cli *client.Client) {
 
 	logOptions := container.LogsOptions{
 		ShowStdout: true,
@@ -82,4 +76,19 @@ func main() {
 	if err := scanner.Err(); err != nil && err != io.EOF {
 		fmt.Printf("Error reading logs: %v\n", err)
 	}
+}
+
+func main() {
+	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	if err != nil {
+		fmt.Printf("Error creating Docker client: %v\n", err)
+		return
+	}
+
+	containerID = "mfins"
+
+	for {
+		CheckLogs(cli)
+	}
+
 }
