@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -18,9 +17,8 @@ type ntfyMsg struct {
 }
 
 func PostData(channel string, content NoticeElement) {
-	addr := os.Getenv("NTFY_ADDR")
 
-	postNtfy(addr, "test", ntfyMsg{
+	postNtfy(Addr, "test", ntfyMsg{
 		Title:    fmt.Sprintf("#%d | %s | %s | %s", content.SerialNo, content.MessageSubject, channel, content.ApprovedOn),
 		Body:     content.MessageBody,
 		Priority: 5,
@@ -42,6 +40,11 @@ func postNtfy(addr string, channel string, msg ntfyMsg) {
 	}`, channel, msg.Body, msg.Title, msg.Priority, msg.Link, msg.Filename)
 
 	req, _ := http.NewRequest("POST", addr, strings.NewReader(body))
+
+	if NtfyUser != "" && NtfyPass != "" {
+		authHeader := fmt.Sprintf("Basic %s:%s", NtfyUser, NtfyPass)
+		req.Header.Set("Authorization", authHeader)
+	}
 
 	req.Header.Set("Markdown", "yes")
 

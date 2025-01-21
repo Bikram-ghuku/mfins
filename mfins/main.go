@@ -38,6 +38,9 @@ var (
 	Client             http.Client
 	TimeRepeat         int64
 	err                error
+	Addr               string
+	NtfyUser           string
+	NtfyPass           string
 )
 
 func RunCron() {
@@ -184,6 +187,10 @@ func initClient() {
 
 func main() {
 	godotenv.Load()
+
+	Addr = os.Getenv("NTFY_ADDR")
+	NtfyUser = os.Getenv("NTFY_USER")
+	NtfyPass = os.Getenv("NTFY_PASS")
 
 	TimeRepeat, err = strconv.ParseInt(os.Getenv("REPEAT"), 10, 10)
 	if err != nil {
