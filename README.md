@@ -27,7 +27,7 @@
   <!-- UPDATE -->
     <i>My Freakin' Internal Noticeboard Scrapper</i>
     <br />
-    <a href="https://UPDATE.metakgp.org">Website</a>
+    <a href="https://naarad.metakgp.org">Website</a>
     ·
     <a href="https://github.com/metakgp/mfins/issues">Request Feature / Report Bug</a>
   </p>
