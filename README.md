@@ -77,7 +77,7 @@ To set up a local instance of the application, follow the steps below.
 ### Prerequisites
 The following dependencies are required to be installed for the project to function properly:
 <!-- UPDATE -->
-* [golang](https://go.dev/doc/install)
+* [go](https://go.dev/doc/install)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
