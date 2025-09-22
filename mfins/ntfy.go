@@ -18,7 +18,7 @@ type ntfyMsg struct {
 
 func PostData(channel string, content NoticeElement) {
 
-	postNtfy(Addr, "test", ntfyMsg{
+	postNtfy(Addr, NtfyTopic, ntfyMsg{
 		Title:    fmt.Sprintf("#%d | %s | %s | %s", content.SerialNo, content.MessageSubject, channel, content.ApprovedOn),
 		Body:     content.MessageBody,
 		Priority: 5,

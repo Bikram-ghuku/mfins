@@ -39,6 +39,7 @@ var (
 	TimeRepeat         int64
 	err                error
 	Addr               string
+	NtfyTopic		   string
 	NtfyUser           string
 	NtfyPass           string
 )
@@ -189,6 +190,7 @@ func main() {
 	godotenv.Load()
 
 	Addr = os.Getenv("NTFY_ADDR")
+	NtfyTopic = os.Getenv("NTFY_TOPIC")
 	NtfyUser = os.Getenv("NTFY_USER")
 	NtfyPass = os.Getenv("NTFY_PASS")
 
