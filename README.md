@@ -103,7 +103,7 @@ _Now that the environment has been set up and configured to properly compile and
     ```sh
       touch lastmsg.json && echo {} > lastmsg.json
     ```
-6. Create `erpcreds.json` and add roll_no, password, answers
+6. Create `erpcreds.json` and add roll_number, password, answers
 
 7. Create a google OAuth client secret and client id and add it to `client_secret.json`
 
