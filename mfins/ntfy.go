@@ -18,9 +18,10 @@ type ntfyMsg struct {
 
 func PostData(channel string, content NoticeElement) {
 
+	formattedNotice := fmt_notice(content)
 	postNtfy(Addr, NtfyTopic, ntfyMsg{
-		Title:    fmt.Sprintf("#%d | %s | %s | %s", content.SerialNo, content.MessageSubject, channel, content.ApprovedOn),
-		Body:     content.MessageBody,
+		Title:    fmt.Sprintf("#%d | %s | %s | %s", formattedNotice.SerialNo, formattedNotice.MessageSubject, channel, formattedNotice.ApprovedOn),
+		Body:     formattedNotice.MessageBody,
 		Priority: 5,
 		Link:     content.AttachmentURL,
 		Filename: "Link 1",
