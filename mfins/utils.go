@@ -4,7 +4,9 @@ import "strings"
 
 func fmt_notice(content NoticeElement) NoticeElement {
 	content.MessageBody = fmt_notice_body(content.MessageBody)
-	content.SerialNo = content.SerialNo | content.MessageId
+	if content.SerialNo == 0 {
+    	content.SerialNo = content.MessageId
+	}
 	return content
 }
 
